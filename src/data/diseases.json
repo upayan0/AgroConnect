@@ -1,0 +1,151 @@
+
+{
+  "diseases": [
+    {
+      "id": "tomato_late_blight",
+      "name": "Tomato Late Blight",
+      "crop": "Tomato",
+      "symptoms": ["Dark brown spots on leaves", "Water-soaked lesions", "White fungal growth on leaf undersides"],
+      "description": "Late blight is a destructive disease caused by Phytophthora infestans that affects tomatoes and potatoes.",
+      "image": "/images/diseases/tomato_late_blight.jpg",
+      "treatments": [
+        {
+          "type": "fungicide",
+          "name": "Copper-based Fungicide",
+          "activeIngredient": "Copper Sulfate",
+          "dosage": "2-3 grams per liter of water",
+          "applicationMethod": "Foliar spray",
+          "frequency": "Every 7-10 days",
+          "safetyPeriod": "7 days before harvest",
+          "price": 25.99,
+          "productId": "FUNG001"
+        },
+        {
+          "type": "fungicide",
+          "name": "Mancozeb Fungicide",
+          "activeIngredient": "Mancozeb 75% WP",
+          "dosage": "2.5 grams per liter of water",
+          "applicationMethod": "Foliar spray",
+          "frequency": "Every 10-14 days",
+          "safetyPeriod": "14 days before harvest",
+          "price": 18.50,
+          "productId": "FUNG002"
+        }
+      ],
+      "fertilizers": [
+        {
+          "name": "Potassium-Rich Fertilizer",
+          "composition": "NPK 12-12-17",
+          "dosage": "200-300 kg per hectare",
+          "applicationMethod": "Soil application",
+          "benefits": "Increases plant resistance to diseases",
+          "price": 45.00,
+          "productId": "FERT001"
+        }
+      ],
+      "culturalPractices": [
+        "Remove infected plant debris",
+        "Ensure proper air circulation",
+        "Avoid overhead irrigation",
+        "Rotate crops annually",
+        "Plant resistant varieties"
+      ],
+      "prevention": [
+        "Use disease-free seeds",
+        "Maintain proper plant spacing",
+        "Apply preventive fungicide sprays",
+        "Monitor weather conditions"
+      ]
+    },
+    {
+      "id": "rice_blast",
+      "name": "Rice Blast",
+      "crop": "Rice",
+      "symptoms": ["Small brown spots on leaves", "Diamond-shaped lesions", "White center with brown margins"],
+      "description": "Rice blast is caused by the fungus Magnaporthe oryzae and is one of the most serious diseases of rice.",
+      "image": "/images/diseases/rice_blast.jpg",
+      "treatments": [
+        {
+          "type": "fungicide",
+          "name": "Tricyclazole Fungicide",
+          "activeIngredient": "Tricyclazole 75% WP",
+          "dosage": "0.6 grams per liter of water",
+          "applicationMethod": "Foliar spray",
+          "frequency": "Every 15 days",
+          "safetyPeriod": "21 days before harvest",
+          "price": 32.00,
+          "productId": "FUNG003"
+        }
+      ],
+      "fertilizers": [
+        {
+          "name": "Silicon Fertilizer",
+          "composition": "Silicon 20%",
+          "dosage": "100 kg per hectare",
+          "applicationMethod": "Soil application",
+          "benefits": "Strengthens plant cell walls against pathogens",
+          "price": 55.00,
+          "productId": "FERT002"
+        }
+      ],
+      "culturalPractices": [
+        "Use resistant varieties",
+        "Maintain balanced nutrition",
+        "Avoid excessive nitrogen",
+        "Proper water management",
+        "Remove infected stubble"
+      ],
+      "prevention": [
+        "Seed treatment with fungicides",
+        "Avoid water stress",
+        "Balanced fertilization",
+        "Field sanitation"
+      ]
+    },
+    {
+      "id": "wheat_rust",
+      "name": "Wheat Rust",
+      "crop": "Wheat",
+      "symptoms": ["Orange-red pustules on leaves", "Yellow spots on upper leaf surface", "Black spores on stems"],
+      "description": "Wheat rust is caused by several species of Puccinia fungi and can cause significant yield losses.",
+      "image": "/images/diseases/wheat_rust.jpg",
+      "treatments": [
+        {
+          "type": "fungicide",
+          "name": "Propiconazole Fungicide",
+          "activeIngredient": "Propiconazole 25% EC",
+          "dosage": "1 ml per liter of water",
+          "applicationMethod": "Foliar spray",
+          "frequency": "Every 21 days",
+          "safetyPeriod": "35 days before harvest",
+          "price": 28.75,
+          "productId": "FUNG004"
+        }
+      ],
+      "fertilizers": [
+        {
+          "name": "Zinc Sulfate",
+          "composition": "Zinc 33%",
+          "dosage": "25 kg per hectare",
+          "applicationMethod": "Soil application",
+          "benefits": "Improves plant immunity and disease resistance",
+          "price": 22.50,
+          "productId": "FERT003"
+        }
+      ],
+      "culturalPractices": [
+        "Plant resistant varieties",
+        "Crop rotation",
+        "Destroy volunteer plants",
+        "Timely sowing",
+        "Balanced fertilization"
+      ],
+      "prevention": [
+        "Use certified seeds",
+        "Monitor field regularly",
+        "Remove alternate hosts",
+        "Proper field hygiene"
+      ]
+    }
+  ]
+}
