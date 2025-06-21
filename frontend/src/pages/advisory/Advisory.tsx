@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
@@ -7,10 +6,16 @@ import { Input } from '../../components/ui/input';
 import { Badge } from '../../components/ui/badge';
 import { Search, Upload, MessageCircle, Leaf, Bug, Zap } from 'lucide-react';
 import diseasesData from '../../data/diseases.json';
+import { predictPlantDisease } from '../../services/disease-predictionService';
 
 export const Advisory = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCrop, setSelectedCrop] = useState('all');
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [prediction, setPrediction] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const diseases = diseasesData.diseases;
   
@@ -41,6 +46,40 @@ export const Advisory = () => {
     }
   };
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedImage(e.target.files[0]);
+      setPrediction(null);
+      setError(null);
+    }
+  };
+
+  const handleUploadClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handlePredict = async () => {
+    if (!selectedImage) return;
+    setLoading(true);
+    setError(null);
+    setPrediction(null);
+    try {
+      const result = await predictPlantDisease(selectedImage);
+      setPrediction(result);
+    } catch (err: any) {
+      setError(err.message || 'Prediction failed.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  React.useEffect(() => {
+    if (selectedImage) {
+      handlePredict();
+    }
+    // eslint-disable-next-line
+  }, [selectedImage]);
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="mb-8">
@@ -65,10 +104,34 @@ export const Advisory = () => {
             <p className="text-gray-600 mb-4">
               Drag and drop your plant image here, or click to browse
             </p>
-            <Button>
+            <input
+              type="file"
+              accept="image/*"
+              style={{ display: 'none' }}
+              ref={fileInputRef}
+              onChange={handleImageChange}
+            />
+            <Button onClick={handleUploadClick} disabled={loading}>
               <Upload className="mr-2 h-4 w-4" />
-              Upload Image
+              {loading ? 'Predicting...' : 'Upload Image'}
             </Button>
+            {selectedImage && (
+              <div className="mt-4 flex justify-center">
+                <img
+                  src={URL.createObjectURL(selectedImage)}
+                  alt="Uploaded plant"
+                  className="max-h-48 rounded shadow border"
+                  style={{ objectFit: 'contain' }}
+                />
+              </div>
+            )}
+            {error && <div className="text-red-500 mt-2">{error}</div>}
+            {prediction && (
+              <div className="mt-4 p-4 border rounded bg-green-50">
+                <div><strong>Predicted Disease:</strong> {prediction.predicted_class}</div>
+                <div><strong>Confidence:</strong> {(prediction.confidence * 100).toFixed(2)}%</div>
+              </div>
+            )}
           </div>
           <p className="text-sm text-gray-500 mt-4">
             Supported formats: JPG, PNG, GIF (max 10MB)
