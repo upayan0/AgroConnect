@@ -1,16 +1,6 @@
-
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useToast } from '../hooks/use-toast';
-
-export interface User {
-  id: string;
-  email: string;
-  name: string;
-  role: 'farmer' | 'buyer' | 'admin';
-  avatar?: string;
-  phone?: string;
-  address?: string;
-}
+import { authService, User, RegisterData } from '../services/authService';
 
 interface AuthContextType {
   user: User | null;
@@ -19,14 +9,6 @@ interface AuthContextType {
   logout: () => void;
   isLoading: boolean;
   forgotPassword: (email: string) => Promise<void>;
-}
-
-interface RegisterData {
-  email: string;
-  password: string;
-  name: string;
-  role: 'farmer' | 'buyer';
-  phone?: string;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -45,54 +27,44 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const { toast } = useToast();
 
   useEffect(() => {
-    // Check for existing auth token on app start
-    const token = localStorage.getItem('agroconnect_token');
-    const userData = localStorage.getItem('agroconnect_user');
-    
-    if (token && userData) {
+    // Check for existing auth token and validate with backend
+    const initializeAuth = async () => {
       try {
-        setUser(JSON.parse(userData));
+        if (authService.isAuthenticated()) {
+          const { user } = await authService.getProfile();
+          setUser(user);
+        }
       } catch (error) {
-        console.error('Error parsing user data:', error);
-        localStorage.removeItem('agroconnect_token');
+        console.error('Error validating token:', error);
+        // Token is invalid, remove it
+        authService.removeToken();
         localStorage.removeItem('agroconnect_user');
+      } finally {
+        setIsLoading(false);
       }
-    }
-    setIsLoading(false);
+    };
+
+    initializeAuth();
   }, []);
 
   const login = async (email: string, password: string) => {
     setIsLoading(true);
     try {
-      // Simulate API call - replace with actual API integration
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await authService.login({ email, password });
       
-      // Mock user data based on role
-      const isFarmer = email.includes('farmer') || email.includes('farm');
-      const mockUser: User = {
-        id: '1',
-        email,
-        name: isFarmer ? 'John Farmer' : 'Jane Buyer',
-        role: isFarmer ? 'farmer' : 'buyer',
-        avatar: '',
-        phone: '+1234567890',
-        address: '123 Main St, City, State'
-      };
-
-      const mockToken = 'mock-jwt-token-' + Date.now();
+      // Store token and user data
+      authService.setToken(response.token);
+      localStorage.setItem('agroconnect_user', JSON.stringify(response.user));
       
-      localStorage.setItem('agroconnect_token', mockToken);
-      localStorage.setItem('agroconnect_user', JSON.stringify(mockUser));
-      
-      setUser(mockUser);
+      setUser(response.user);
       toast({
         title: "Login Successful",
-        description: `Welcome back, ${mockUser.name}!`,
+        description: `Welcome back, ${response.user.name}!`,
       });
     } catch (error) {
       toast({
         title: "Login Failed",
-        description: "Invalid credentials. Please check your email and password.",
+        description: error instanceof Error ? error.message : "Invalid credentials. Please check your email and password.",
         variant: "destructive",
       });
       throw error;
@@ -104,31 +76,21 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const register = async (userData: RegisterData) => {
     setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await authService.register(userData);
       
-      const newUser: User = {
-        id: Date.now().toString(),
-        email: userData.email,
-        name: userData.name,
-        role: userData.role,
-        phone: userData.phone,
-      };
-
-      const mockToken = 'mock-jwt-token-' + Date.now();
+      // Store token and user data
+      authService.setToken(response.token);
+      localStorage.setItem('agroconnect_user', JSON.stringify(response.user));
       
-      localStorage.setItem('agroconnect_token', mockToken);
-      localStorage.setItem('agroconnect_user', JSON.stringify(newUser));
-      
-      setUser(newUser);
+      setUser(response.user);
       toast({
         title: "Registration Successful",
-        description: `Welcome to AgroConnect, ${newUser.name}!`,
+        description: `Welcome to AgroConnect, ${response.user.name}!`,
       });
     } catch (error) {
       toast({
         title: "Registration Failed",
-        description: "Failed to create account. Please try again.",
+        description: error instanceof Error ? error.message : "Failed to create account. Please try again.",
         variant: "destructive",
       });
       throw error;
@@ -138,7 +100,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const logout = () => {
-    localStorage.removeItem('agroconnect_token');
+    authService.removeToken();
     localStorage.removeItem('agroconnect_user');
     setUser(null);
     toast({
@@ -149,8 +111,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const forgotPassword = async (email: string) => {
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await authService.forgotPassword(email);
       toast({
         title: "Password Reset Email Sent",
         description: "Please check your email for reset instructions.",
@@ -158,7 +119,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to send reset email. Please try again.",
+        description: error instanceof Error ? error.message : "Failed to send reset email. Please try again.",
         variant: "destructive",
       });
       throw error;
