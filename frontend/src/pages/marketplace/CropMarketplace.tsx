@@ -16,7 +16,7 @@ export const CropMarketplace = () => {
   
   const { addToCart } = useCart();
 
-  // Mock data for demonstration
+  // Mock data for demonstration with actual images
   const crops = [
     {
       id: '1',
@@ -29,7 +29,7 @@ export const CropMarketplace = () => {
       location: 'Maharashtra',
       rating: 4.8,
       reviews: 24,
-      image: '/images/crops/tomatoes.jpg',
+      image: '/images/tomato.jpg',
       description: 'Fresh organic tomatoes grown without pesticides',
       organic: true
     },
@@ -44,7 +44,7 @@ export const CropMarketplace = () => {
       location: 'Punjab',
       rating: 4.9,
       reviews: 156,
-      image: '/images/crops/rice.jpg',
+      image: '/images/images (1).jpg',
       description: 'Long grain basmati rice with excellent aroma',
       organic: false
     },
@@ -59,7 +59,7 @@ export const CropMarketplace = () => {
       location: 'Karnataka',
       rating: 4.6,
       reviews: 42,
-      image: '/images/crops/carrots.jpg',
+      image: '/images/carrot.jpg',
       description: 'Crisp and sweet carrots perfect for cooking',
       organic: true
     },
@@ -74,7 +74,7 @@ export const CropMarketplace = () => {
       location: 'Madhya Pradesh',
       rating: 4.7,
       reviews: 89,
-      image: '/images/crops/wheat.jpg',
+      image: '/images/images (2).jpg',
       description: 'High-quality wheat grain for milling',
       organic: false
     },
@@ -89,7 +89,7 @@ export const CropMarketplace = () => {
       location: 'Himachal Pradesh',
       rating: 4.5,
       reviews: 18,
-      image: '/images/crops/spinach.jpg',
+      image: '/images/images (3).jpg',
       description: 'Fresh baby spinach leaves, ready to eat',
       organic: true
     },
@@ -104,9 +104,99 @@ export const CropMarketplace = () => {
       location: 'Gujarat',
       rating: 4.4,
       reviews: 67,
-      image: '/images/crops/corn.jpg',
+      image: '/images/images (4).jpg',
       description: 'Sweet and tender corn kernels',
       organic: false
+    },
+    {
+      id: '7',
+      name: 'Fresh Fruits',
+      price: 80,
+      unit: 'kg',
+      stock: 100,
+      category: 'fruits',
+      farmer: 'Orchard Delights',
+      location: 'Himachal Pradesh',
+      rating: 4.7,
+      reviews: 89,
+      image: '/images/Fruit.jpg',
+      description: 'Assorted fresh seasonal fruits',
+      organic: true
+    },
+    {
+      id: '8',
+      name: 'Organic Potatoes',
+      price: 20,
+      unit: 'kg',
+      stock: 300,
+      category: 'vegetables',
+      farmer: 'Root Valley Farm',
+      location: 'Uttar Pradesh',
+      rating: 4.3,
+      reviews: 56,
+      image: '/images/images (5).jpg',
+      description: 'Fresh organic potatoes perfect for cooking',
+      organic: true
+    },
+    {
+      id: '9',
+      name: 'Premium Onions',
+      price: 15,
+      unit: 'kg',
+      stock: 400,
+      category: 'vegetables',
+      farmer: 'Bulb Harvest Co.',
+      location: 'Maharashtra',
+      rating: 4.2,
+      reviews: 78,
+      image: '/images/images (6).jpg',
+      description: 'Large, fresh onions with excellent flavor',
+      organic: false
+    },
+    {
+      id: '10',
+      name: 'Mixed Vegetables',
+      price: 45,
+      unit: 'kg',
+      stock: 120,
+      category: 'vegetables',
+      farmer: 'Garden Fresh',
+      location: 'Karnataka',
+      rating: 4.6,
+      reviews: 34,
+      image: '/images/images.jpg',
+      description: 'Assorted fresh vegetables from our garden',
+      organic: true
+    },
+    {
+      id: '11',
+      name: 'Frost Resistant Tomatoes',
+      price: 55,
+      unit: 'kg',
+      stock: 80,
+      category: 'vegetables',
+      farmer: 'Climate Smart Farms',
+      location: 'Himachal Pradesh',
+      rating: 4.8,
+      reviews: 45,
+      image: '/images/tomato-wheatlys-frost-resistant-3.jpg',
+      description: 'Special frost-resistant tomato variety',
+      organic: true
+    },
+    {
+      id: '12',
+      name: 'Organic Vermicompost',
+      price: 25,
+      unit: 'kg',
+      stock: 200,
+      category: 'inputs',
+      farmer: 'Eco Soil Solutions',
+      location: 'Kerala',
+      rating: 4.9,
+      reviews: 123,
+      image: '/images/vermicompost.jpg',
+      description: 'High-quality organic vermicompost for better crop yield',
+      organic: true
     }
   ];
 
@@ -174,6 +264,7 @@ export const CropMarketplace = () => {
               <SelectItem value="vegetables">Vegetables</SelectItem>
               <SelectItem value="grains">Grains</SelectItem>
               <SelectItem value="fruits">Fruits</SelectItem>
+              <SelectItem value="inputs">Inputs</SelectItem>
             </SelectContent>
           </Select>
 
@@ -214,9 +305,11 @@ export const CropMarketplace = () => {
         {sortedCrops.map((crop) => (
           <Card key={crop.id} className="hover:shadow-lg transition-shadow">
             <div className="relative">
-              <div className="h-48 bg-gray-200 rounded-t-lg flex items-center justify-center">
-                <span className="text-gray-500">Image placeholder</span>
-              </div>
+              <img 
+                src={crop.image} 
+                alt={crop.name}
+                className="h-48 w-full object-cover rounded-t-lg"
+              />
               {crop.organic && (
                 <Badge className="absolute top-2 right-2 bg-green-100 text-green-800">
                   Organic
