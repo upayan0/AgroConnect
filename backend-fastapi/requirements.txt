@@ -1,9 +1,9 @@
-fastapi==0.115.13
-gdown==5.2.0
+fastapi
+gdown
 numpy
-Pillow==11.2.1
-pydantic==2.11.7
-Requests==2.32.4
-tensorflow==2.18.0
-tensorflow_intel==2.18.0
-uvicorn==0.34.3
+Pillow
+pydantic
+Requests
+tensorflow
+tensorflow_intel
+uvicorn
