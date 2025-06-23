@@ -16,6 +16,11 @@ import tempfile
 from contextlib import asynccontextmanager
 import gdown
 
+# Tell TF not to even look for GPUs
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+# (Optional) also mute INFO logs:
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "1"
+
 DRIVE_MODEL_ID = "1HM2Q94tejdA7cPAAF-5N2aYNoKE_ZEik"
 DRIVE_MODEL_URL = f"https://drive.google.com/uc?id={DRIVE_MODEL_ID}"
 
