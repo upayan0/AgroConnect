@@ -170,7 +170,12 @@ export const Advisory = () => {
         {filteredDiseases.map((disease) => (
           <Card key={disease.id} className="hover:shadow-lg transition-shadow">
             <div className="h-48 bg-gray-200 rounded-t-lg flex items-center justify-center">
-              <Leaf className="h-16 w-16 text-gray-400" />
+              {/* <Leaf className="h-16 w-16 text-gray-400" /> */}
+              <img 
+                src={disease.image} 
+                alt={disease.name} 
+                className="h-full w-full object-cover rounded-t-lg"
+              />
             </div>
             
             <CardHeader>
