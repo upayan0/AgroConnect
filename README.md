@@ -1,158 +1,66 @@
-# AgroConnect - Agricultural Marketplace Platform
+AgroConnect: Doesn’t just grow crops — it grows farmers, communities, and futures.
 
-A full-stack agricultural marketplace platform connecting farmers and buyers.
+Description:
 
-## Project Structure
+AgroConnect is a unified digital platform designed to empower Indian farmers by enabling them to directly connect with buyers, access personalized crop and pesticide advisories, and explore educational resources to modernize their agricultural practices. We believe that the true potential of agriculture in India remains untapped—not because of lack of produce, but due to broken supply chains, lack of awareness, and exploitation by intermediaries.# 🌾 AgroConnect
 
-- **Frontend**: React + TypeScript + Vite + shadcn-ui + Tailwind CSS
-- **Backend**: Express.js + MongoDB + JWT Authentication
-- **AI Services**: FastAPI backend for disease prediction and AI features
+> **“AgroConnect doesn’t just grow crops — it grows farmers, communities, and futures.”**
 
-## Quick Start
+---
 
-### Prerequisites
+## 📌 Overview
 
-- Node.js (v16 or higher)
-- MongoDB (running locally or cloud instance)
-- npm or yarn
+**AgroConnect** is a unified digital platform designed to **empower Indian farmers** by connecting them directly with buyers, providing **personalized crop and pesticide advisories**, and offering **educational resources** to modernize their practices.
 
-### Backend Setup
+> 🚜 India grows enough. It’s time we help farmers grow **smarter, richer, and stronger**.
 
-1. Navigate to the backend directory:
-```bash
-cd backend-expressjs
-```
+---
 
-2. Install dependencies:
-```bash
-npm install
-```
+## 🚀 Live Deployment
 
-3. Create a `.env` file with the following variables:
-```
-PORT=5000
-MONGO_URI=mongodb://localhost:27017/agroconnect
-JWT_SECRET=your_super_secret_jwt_key_change_this_in_production
-```
+🔗 **Visit the App**: [AgroConnect Live](https://agro-connect-y6nl-upayanchatterjee7-gmailcoms-projects.vercel.app/)  
+_(Deployed via Vercel)_
 
-4. Start the backend server:
-```bash
-npm run dev
-```
+---
 
-The backend will be running on `http://localhost:5000`
+## 🌟 Key Features
 
-### Frontend Setup
+- ✅ **Direct Farmer-Buyer Connection** – Eliminates intermediaries and ensures fair pricing.
+- 📚 **Knowledge Hub** – Access articles, videos, and tutorials on modern agriculture.
+- 🧠 **AI-Based Advisory System** – Get real-time, personalized suggestions on crops and pesticides.
+- 🌐 **Multilingual Interface** – Designed for inclusivity across India.
+- 🔐 **Secure Profiles** – Verified identities for trust and transparency.
+- 📊 **Data-Driven Decisions** – Insights for better farming outcomes.
 
-1. Navigate to the frontend directory:
-```bash
-cd frontend
-```
+---
 
-2. Install dependencies:
-```bash
-npm install
-```
+## 🖼️ Screenshots
 
-3. Start the development server:
-```bash
-npm run dev
-```
+> *(Add images or UI previews here if available)*
 
-The frontend will be running on `http://localhost:5173`
+---
 
-## Features
+## 🛠️ Tech Stack
 
-### Authentication
-- User registration and login
-- Role-based access (Farmer/Buyer/Admin)
-- JWT token-based authentication
-- Password reset functionality
-- Profile management
+- **Frontend:** React.js, Tailwind CSS  
+- **Backend:** Java (Spring Boot)  
+- **Database:** H2 / PostgreSQL  
+- **Other Tools:** ModelMapper, Postman, Git, IntelliJ, VS Code  
+- **Deployment:** Vercel  
 
-### User Roles
-- **Farmer**: Can list and sell agricultural products
-- **Buyer**: Can browse and purchase products
-- **Admin**: Platform management and oversight
+---
 
-### Core Features
-- User authentication and authorization
-- Product marketplace
-- Weather information
-- Disease prediction (AI-powered)
-- Learning resources
-- Advisory services
+## 🌱 Our Mission
 
-## API Endpoints
+We believe India’s agricultural potential is held back not by its farmers—but by **broken supply chains**, **lack of access**, and **exploitative practices**. AgroConnect strives to fix that with **technology and trust**.
 
-### Authentication
-- `POST /api/auth/register` - Register a new user
-- `POST /api/auth/login` - Login user
-- `POST /api/auth/forgot-password` - Request password reset
-- `GET /api/auth/profile` - Get user profile (requires auth)
-- `PUT /api/auth/profile` - Update user profile (requires auth)
+> Agriculture isn't just about crops — it's about **people**, **communities**, and **futures**.
 
-## Technologies Used
+---
 
-### Frontend
-- React 18
-- TypeScript
-- Vite
-- shadcn-ui components
-- Tailwind CSS
-- React Router
-- Context API for state management
+## 💬 Feedback & Contributions
 
-### Backend
-- Express.js
-- MongoDB with Mongoose
-- JWT for authentication
-- bcryptjs for password hashing
-- CORS enabled
+We welcome your feedback!  
+Feel free to open an issue, fork the repository, or reach out via email.
 
-### AI Services
-- FastAPI (Python)
-- Machine learning models for disease prediction
-
-## Development
-
-### Backend Development
-```bash
-cd backend-expressjs
-npm run dev
-```
-
-### Frontend Development
-```bash
-cd frontend
-npm run dev
-```
-
-### Database
-Make sure MongoDB is running. You can use:
-- Local MongoDB installation
-- MongoDB Atlas (cloud)
-- Docker: `docker run -d -p 27017:27017 --name mongodb mongo:latest`
-
-## Deployment
-
-### Backend Deployment
-1. Set up environment variables in production
-2. Deploy to platforms like Heroku, Railway, or DigitalOcean
-3. Configure MongoDB connection string
-
-### Frontend Deployment
-1. Build the project: `npm run build`
-2. Deploy the `dist` folder to platforms like Vercel, Netlify, or GitHub Pages
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-## License
-
-This project is licensed under the MIT License.
+---
