@@ -179,7 +179,7 @@ export const FAQs = () => {
             </div>
             <div className="flex items-center space-x-2 text-sm text-gray-600">
               <MessageCircle className="h-4 w-4" />
-              <span>Use ChatKulim (bottom right) for instant help</span>
+              <span>Use Agrobot for instant help</span>
             </div>
           </div>
         </CardContent>

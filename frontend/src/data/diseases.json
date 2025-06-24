@@ -7,7 +7,7 @@
       "crop": "Tomato",
       "symptoms": ["Dark brown spots on leaves", "Water-soaked lesions", "White fungal growth on leaf undersides"],
       "description": "Late blight is a destructive disease caused by Phytophthora infestans that affects tomatoes and potatoes.",
-      "image": "/images/diseases/tomato_late_blight.jpg",
+      "image": "/images/Fruit.jpg",
       "treatments": [
         {
           "type": "fungicide",
@@ -63,7 +63,7 @@
       "crop": "Rice",
       "symptoms": ["Small brown spots on leaves", "Diamond-shaped lesions", "White center with brown margins"],
       "description": "Rice blast is caused by the fungus Magnaporthe oryzae and is one of the most serious diseases of rice.",
-      "image": "/images/diseases/rice_blast.jpg",
+      "image": "/images/images.jpg",
       "treatments": [
         {
           "type": "fungicide",
@@ -108,7 +108,7 @@
       "crop": "Wheat",
       "symptoms": ["Orange-red pustules on leaves", "Yellow spots on upper leaf surface", "Black spores on stems"],
       "description": "Wheat rust is caused by several species of Puccinia fungi and can cause significant yield losses.",
-      "image": "/images/diseases/wheat_rust.jpg",
+      "image": "/images/leaf-rust.jpg",
       "treatments": [
         {
           "type": "fungicide",

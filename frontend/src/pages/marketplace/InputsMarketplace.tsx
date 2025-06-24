@@ -29,6 +29,7 @@ export const InputsMarketplace = () => {
       description: 'Effective against late blight and other fungal diseases',
       usage: 'For tomato, potato, and vegetable crops',
       safetyPeriod: '7 days',
+      image: '/images/liquid_copper.jpg',
       stock: 120
     },
     {
@@ -42,6 +43,8 @@ export const InputsMarketplace = () => {
       reviews: 89,
       description: 'Balanced fertilizer for healthy plant growth',
       usage: 'Suitable for all crop types',
+       image: '/images/images (5).jpg',
+
       applicationRate: '200-300 kg per hectare',
       stock: 500
     },
@@ -56,6 +59,7 @@ export const InputsMarketplace = () => {
       reviews: 156,
       description: 'High-yield hybrid paddy seeds with disease resistance',
       usage: 'Suitable for both Kharif and Rabi seasons',
+      image: '/images/images (6).jpg',
       germination: '85%+',
       stock: 75
     },
@@ -70,6 +74,7 @@ export const InputsMarketplace = () => {
       reviews: 67,
       description: 'Natural pest control solution',
       usage: 'For aphids, whiteflies, and other pests',
+      image: '/images/neem_oil.jpg',
       organic: true,
       stock: 200
     },
@@ -84,6 +89,7 @@ export const InputsMarketplace = () => {
       reviews: 45,
       description: 'Accurate soil pH measurement tool',
       usage: 'For soil testing and analysis',
+      image: '/images/meter.jpg',
       warranty: '2 years',
       stock: 30
     },
@@ -98,6 +104,7 @@ export const InputsMarketplace = () => {
       reviews: 78,
       description: 'Rich organic compost for soil improvement',
       usage: 'For all types of crops and gardens',
+      image: '/images/vermicompost.jpg',
       organic: true,
       stock: 150
     }
@@ -126,7 +133,7 @@ export const InputsMarketplace = () => {
       id: input.id,
       name: input.name,
       price: input.price,
-      image: '/images/inputs/placeholder.jpg',
+      image: input.image,
       category: 'input',
       unit: input.unit,
     });
@@ -215,10 +222,13 @@ export const InputsMarketplace = () => {
         {sortedInputs.map((input) => (
           <Card key={input.id} className="hover:shadow-lg transition-shadow">
             <div className="relative">
-              <div className="h-48 bg-gray-200 rounded-t-lg flex items-center justify-center">
-                {getCategoryIcon(input.category)}
-                <span className="ml-2 text-gray-500">Product Image</span>
-              </div>
+<div className="h-48 rounded-t-lg overflow-hidden">
+  <img 
+    src={input.image} 
+    alt={input.name} 
+    className="h-full w-full object-cover" 
+  />
+</div>
               <Badge 
                 className={`absolute top-2 right-2 ${getCategoryColor(input.category)}`}
               >

@@ -74,7 +74,7 @@ export const CropMarketplace = () => {
       location: 'Madhya Pradesh',
       rating: 4.7,
       reviews: 89,
-      image: '/images/images (2).jpg',
+      image: '/images/images (4).jpg',
       description: 'High-quality wheat grain for milling',
       organic: false
     },
@@ -104,13 +104,13 @@ export const CropMarketplace = () => {
       location: 'Gujarat',
       rating: 4.4,
       reviews: 67,
-      image: '/images/images (4).jpg',
+      image: '/images/images (2).jpg',
       description: 'Sweet and tender corn kernels',
       organic: false
     },
     {
       id: '7',
-      name: 'Fresh Fruits',
+      name: 'Fresh Mangoes',
       price: 80,
       unit: 'kg',
       stock: 100,
@@ -119,7 +119,7 @@ export const CropMarketplace = () => {
       location: 'Himachal Pradesh',
       rating: 4.7,
       reviews: 89,
-      image: '/images/Fruit.jpg',
+      image: '/images/mango.jpeg',
       description: 'Assorted fresh seasonal fruits',
       organic: true
     },
@@ -134,7 +134,7 @@ export const CropMarketplace = () => {
       location: 'Uttar Pradesh',
       rating: 4.3,
       reviews: 56,
-      image: '/images/images (5).jpg',
+      image: '/images/potato.jpg',
       description: 'Fresh organic potatoes perfect for cooking',
       organic: true
     },
@@ -149,7 +149,7 @@ export const CropMarketplace = () => {
       location: 'Maharashtra',
       rating: 4.2,
       reviews: 78,
-      image: '/images/images (6).jpg',
+      image: '/images/onion.jpg',
       description: 'Large, fresh onions with excellent flavor',
       organic: false
     },
@@ -164,7 +164,7 @@ export const CropMarketplace = () => {
       location: 'Karnataka',
       rating: 4.6,
       reviews: 34,
-      image: '/images/images.jpg',
+      image: '/images/mixed vegetable.jpg',
       description: 'Assorted fresh vegetables from our garden',
       organic: true
     },
