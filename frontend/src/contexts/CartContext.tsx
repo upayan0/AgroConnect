@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { useToast } from '../hooks/use-toast';
 
@@ -45,7 +44,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       if (existingItem) {
         toast({
           title: "Cart Updated",
-          description: `₹{item.name} quantity updated in cart`,
+          description: `${item.name} quantity updated in cart`,
         });
         return prevItems.map(cartItem =>
           cartItem.id === item.id
@@ -55,7 +54,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       } else {
         toast({
           title: "Added to Cart",
-          description: `₹{item.name} added to cart`,
+          description: `${item.name} added to cart`,
         });
         return [...prevItems, { ...item, quantity }];
       }
@@ -68,7 +67,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       if (item) {
         toast({
           title: "Removed from Cart",
-          description: `₹{item.name} removed from cart`,
+          description: `${item.name} removed from cart`,
         });
       }
       return prevItems.filter(cartItem => cartItem.id !== itemId);

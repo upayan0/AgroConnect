@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useCart } from '../../contexts/CartContext';
@@ -15,7 +14,7 @@ import {
   Droplets,
   Clock,
   Shield,
-  DollarSign
+  IndianRupee
 } from 'lucide-react';
 import diseasesData from '../../data/diseases.json';
 
@@ -141,7 +140,7 @@ export const AdvisoryDetail = () => {
                       </div>
                       <div className="text-right">
                         <div className="flex items-center text-green-600 font-semibold">
-                          <DollarSign className="h-4 w-4" />
+                          <IndianRupee className="h-4 w-4" />
                           {treatment.price}
                         </div>
                       </div>
@@ -185,7 +184,7 @@ export const AdvisoryDetail = () => {
                         className="w-full"
                       >
                         <ShoppingCart className="h-4 w-4 mr-2" />
-                        Add to Cart -₹ {treatment.price}
+                        Add to Cart - ₹{treatment.price}
                       </Button>
                     </div>
                   </div>
@@ -217,7 +216,7 @@ export const AdvisoryDetail = () => {
                         </div>
                         <div className="text-right">
                           <div className="flex items-center text-green-600 font-semibold">
-                            <DollarSign className="h-4 w-4" />
+                            <IndianRupee className="h-4 w-4" />
                             {fertilizer.price}
                           </div>
                         </div>
@@ -239,7 +238,7 @@ export const AdvisoryDetail = () => {
                         variant="outline"
                       >
                         <ShoppingCart className="h-4 w-4 mr-2" />
-                        Add to Cart - ₹ {fertilizer.price}
+                        Add to Cart - ₹{fertilizer.price}
                       </Button>
                     </div>
                   ))}
