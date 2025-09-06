@@ -10,9 +10,10 @@ from PIL import Image
 import gdown
 
 # Tell TF not to even look for GPUs
+# Disable GPU so TF won't try to init CUDA
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-# (Optional) also mute INFO logs:
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "1"
+# Mute most TF messages (optional)
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 
 DRIVE_MODEL_ID = "1HM2Q94tejdA7cPAAF-5N2aYNoKE_ZEik"
 DRIVE_MODEL_URL = f"https://drive.google.com/uc?id={DRIVE_MODEL_ID}"
