@@ -1,19 +1,12 @@
-from fastapi import FastAPI, File, UploadFile, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-from typing import List, Optional
-import uvicorn
-import json
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 import os
+import io
 import base64
-import io 
-from PIL import Image
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras
-import requests
-import tempfile
-from contextlib import asynccontextmanager
+from PIL import Image
 import gdown
 
 # Tell TF not to even look for GPUs
@@ -26,7 +19,6 @@ DRIVE_MODEL_URL = f"https://drive.google.com/uc?id={DRIVE_MODEL_ID}"
 
 # Local path to save the downloaded model
 MODEL_PATH = "PDDS.keras"
-# CLASS_NAMES_PATH = "class_names.txt"
 
 # Download the model from Google Drive if not present
 if not os.path.exists(MODEL_PATH):
@@ -45,18 +37,12 @@ if os.path.exists("class_names.txt"):
         class_names = [line.strip() for line in f.readlines()]
 else:
     print("Error: class_names.txt file not found.")
+    class_names = []
 
-# Create FastAPI app
-app = FastAPI(title="Plant Disease Detection API")
+# Flask app
+app = Flask(__name__)
+CORS(app)  # allow all origins
 
-# Add CORS middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 # Preprocess image function
 def preprocess_image(img):
@@ -66,20 +52,19 @@ def preprocess_image(img):
     img_array = img_array / 255.0
     return img_array
 
+# Root endpoint
+@app.route("/", methods=["GET"])
+def root():
+    return jsonify({"message": "Welcome to the Plant Disease Detection API!"})
 
+# Prediction endpoint
+@app.route("/predict", methods=["POST"])
+def predict():
+    if "file" not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
 
-
-# FastAPI endpoint for testing root
-@app.get("/")
-async def root():
-    return {"message": "Welcome to the Plant Disease Detection API!"}
-
-# FastAPI endpoint for prediction
-@app.post("/predict/")
-async def predict(file: UploadFile = File(...)):
-    # Read and convert the file to PIL Image
-    contents = await file.read()
-    img = Image.open(io.BytesIO(contents)).convert("RGB")
+    file = request.files["file"]
+    img = Image.open(io.BytesIO(file.read())).convert("RGB")
 
     # Preprocess the image
     processed_img = preprocess_image(img)
@@ -87,17 +72,16 @@ async def predict(file: UploadFile = File(...)):
     # Make prediction
     predictions = model.predict(processed_img)
     predicted_class_idx = np.argmax(predictions[0])
-    predicted_class = class_names[predicted_class_idx]
+    predicted_class = class_names[predicted_class_idx] if class_names else str(predicted_class_idx)
     confidence = float(predictions[0][predicted_class_idx])
 
-    # Return prediction
-    return {
+    return jsonify({
         "predicted_class": predicted_class,
         "confidence": confidence,
         "class_names": class_names,
         "probabilities": predictions[0].tolist()
-    }
+    })
 
 if __name__ == "__main__":
-    
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+    app.run(host="0.0.0.0", port=8000, debug=True)
+

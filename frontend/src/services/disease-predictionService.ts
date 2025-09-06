@@ -4,7 +4,7 @@ export const predictPlantDisease = async (imageFile: File): Promise<any> => {
     formData.append('file', imageFile);
   
     // Update the URL if your backend is hosted elsewhere
-    const API_URL = 'http://localhost:8000/predict/';
+    const API_URL = 'http://localhost:8000/predict';
   
     try {
       const response = await fetch(API_URL, {
