@@ -27,28 +27,28 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const { toast } = useToast();
 
   // Periodic token validation
-  useEffect(() => {
-    if (!user) return;
+  // useEffect(() => {
+  //   if (!user) return;
 
-    const validateToken = async () => {
-      try {
-        if (authService.isTokenExpiringSoon()) {
-          console.log('Token expiring soon, refreshing user data...');
-          const { user: freshUser } = await authService.getProfile();
-          setUser(freshUser);
-          localStorage.setItem('agroconnect_user', JSON.stringify(freshUser));
-        }
-      } catch (error) {
-        console.error('Token validation failed:', error);
-        // Token is invalid, log out user
-        logout();
-      }
-    };
+  //   const validateToken = async () => {
+  //     try {
+  //       if (authService.isTokenExpiringSoon()) {
+  //         console.log('Token expiring soon, refreshing user data...');
+  //         const { user: freshUser } = await authService.getProfile();
+  //         setUser(freshUser);
+  //         localStorage.setItem('agroconnect_user', JSON.stringify(freshUser));
+  //       }
+  //     } catch (error) {
+  //       console.error('Token validation failed:', error);
+  //       // Token is invalid, log out user
+  //       logout();
+  //     }
+  //   };
 
-    // Check token every 30 minutes
-    const interval = setInterval(validateToken, 30 * 60 * 1000);
-    return () => clearInterval(interval);
-  }, [user]);
+  //   // Check token every 30 minutes
+  //   const interval = setInterval(validateToken, 30 * 60 * 1000);
+  //   return () => clearInterval(interval);
+  // }, [user]);
 
   useEffect(() => {
     // Check for existing auth token and validate with backend
@@ -58,7 +58,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         const storedUser = authService.getStoredUser();
 
         if (token) {
-          // Optimistically restore stored user for better UX
+  
           if (storedUser) {
             setUser(storedUser);
           }
@@ -78,10 +78,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                 apiError.message.includes('Failed to fetch')));
 
             if (storedUser && isNetworkError) {
-              // Keep using stored data during network issues
+            
               console.log('Using stored user data due to network error');
             } else if (storedUser && !isNetworkError) {
-              // Likely auth error, but keep stored user to avoid jarring logout
+            
               console.log('Auth validation failed; keeping stored user until next secure action');
             } else {
               // No stored data and validation failed; clear token
