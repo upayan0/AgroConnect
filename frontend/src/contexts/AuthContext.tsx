@@ -26,19 +26,78 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
 
+  // Periodic token validation
+  // useEffect(() => {
+  //   if (!user) return;
+
+  //   const validateToken = async () => {
+  //     try {
+  //       if (authService.isTokenExpiringSoon()) {
+  //         console.log('Token expiring soon, refreshing user data...');
+  //         const { user: freshUser } = await authService.getProfile();
+  //         setUser(freshUser);
+  //         localStorage.setItem('agroconnect_user', JSON.stringify(freshUser));
+  //       }
+  //     } catch (error) {
+  //       console.error('Token validation failed:', error);
+  //       // Token is invalid, log out user
+  //       logout();
+  //     }
+  //   };
+
+  //   // Check token every 30 minutes
+  //   const interval = setInterval(validateToken, 30 * 60 * 1000);
+  //   return () => clearInterval(interval);
+  // }, [user]);
+
   useEffect(() => {
     // Check for existing auth token and validate with backend
     const initializeAuth = async () => {
       try {
-        if (authService.isAuthenticated()) {
-          const { user } = await authService.getProfile();
-          setUser(user);
+        const token = authService.getToken();
+        const storedUser = authService.getStoredUser();
+
+        if (token) {
+  
+          if (storedUser) {
+            setUser(storedUser);
+          }
+
+          // Validate token with backend and refresh user data
+          try {
+            const { user } = await authService.getProfile();
+            setUser(user);
+            localStorage.setItem('agroconnect_user', JSON.stringify(user));
+          } catch (apiError) {
+            console.error('Error validating token with backend:', apiError);
+
+            const isNetworkError = !navigator.onLine ||
+              (apiError instanceof Error &&
+               (apiError.message.includes('fetch') ||
+                apiError.message.includes('network') ||
+                apiError.message.includes('Failed to fetch')));
+
+            if (storedUser && isNetworkError) {
+            
+              console.log('Using stored user data due to network error');
+            } else if (storedUser && !isNetworkError) {
+            
+              console.log('Auth validation failed; keeping stored user until next secure action');
+            } else {
+              // No stored data and validation failed; clear token
+              authService.removeToken();
+              setUser(null);
+            }
+          }
+        } else {
+          setUser(null);
         }
       } catch (error) {
-        console.error('Error validating token:', error);
-        // Token is invalid, remove it
+        console.error('Error during auth initialization:', error);
+        // Critical error, clear everything
         authService.removeToken();
         localStorage.removeItem('agroconnect_user');
+        setUser(null);
       } finally {
         setIsLoading(false);
       }
