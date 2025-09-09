@@ -111,7 +111,7 @@ export const Login = () => {
 
           <div className="mt-4 text-center">
             <p className="text-xs text-gray-500">
-              Demo: Use "farmer@example.com" or "buyer@example.com" with any password
+              Demo: Use "farmer@gmail.com" or "hello@gmail.com" with password 12345678
             </p>
           </div>
         </CardContent>

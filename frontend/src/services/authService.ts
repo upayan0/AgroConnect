@@ -1,4 +1,7 @@
-const API_BASE_URL = 'http://localhost:5000/api';
+// authService.ts
+const API_BASE_URL = import.meta.env.MODE === 'production'
+    ? 'https://your-backend.vercel.app/api'
+    : 'http://localhost:5000/api';
 
 export interface User {
   id: string;
