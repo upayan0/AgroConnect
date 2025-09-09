@@ -1,6 +1,6 @@
 // authService.ts
 const API_BASE_URL = import.meta.env.MODE === 'production'
-    ? 'https://your-backend.vercel.app/api'
+    ? 'https://agro-connect-p7j2.vercel.app/api'
     : 'http://localhost:5000/api';
 
 export interface User {
