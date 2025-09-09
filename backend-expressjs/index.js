@@ -15,7 +15,8 @@ app.use(bodyParser.json());
 
 // cors middleware
 app.use(cors({
-    origin: ['http://localhost:8080','http://localhost:8081','https://agro-connect-y6nl-git-main-upayanchatterjee7-gmailcoms-projects.vercel.app','https://agro-connect-y6nl-upayanchatterjee7-gmailcoms-projects.vercel.app','https://agro-connect-y6nl.vercel.app','https://agro-connect-p7j2.vercel.app'],
+    //origin: ['http://localhost:8080','http://localhost:8081','https://agro-connect-y6nl-git-main-upayanchatterjee7-gmailcoms-projects.vercel.app','https://agro-connect-y6nl-upayanchatterjee7-gmailcoms-projects.vercel.app','https://agro-connect-y6nl.vercel.app','https://agro-connect-p7j2.vercel.app'],
+    origin:true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
