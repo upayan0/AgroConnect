@@ -50,8 +50,18 @@ export const getGeminiResponse = async (userMessage: string): Promise<string> =>
     });
 
     const result = await chat.sendMessage(userMessage);
-    const response = await result.response;
-    return response.text();
+    const response = await result.response.text();
+  // Remove common regex tokens like .*, \d+, \w+, [a-z], etc.
+  const cleanedResponse = response
+  .replace(/\.\*/g, "")       // remove .*
+  .replace(/\\d\+/g, "")      // remove \d+
+  .replace(/\\w\+/g, "")      // remove \w+
+  .replace(/\[.*?\]/g, "")    // remove [a-z], [0-9], etc.
+  .replace(/\\s\+/g, "")      // remove \s+
+  .replace(/\\b/g, "")        // remove \b
+  .replace(/\\./g, "")        // remove escaped dots like \.
+  .replace(/\n\n/g, "\n");    // clean double newlines
+    return cleanedResponse;
   } catch (error) {
     console.error('Error getting Gemini response:', error);
     throw new Error('Failed to get response from AI assistant. Please try again.');
