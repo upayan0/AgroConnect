@@ -13,32 +13,38 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/agroconnec
 
 app.use(bodyParser.json());
 
-// // cors middleware
-// app.use(cors({
-//     origin: ['http://localhost:8080','http://localhost:8081','https://agro-connect-y6nl-git-main-upayanchatterjee7-gmailcoms-projects.vercel.app','https://agro-connect-y6nl-upayanchatterjee7-gmailcoms-projects.vercel.app','https://agro-connect-y6nl.vercel.app','https://agro-connect-p7j2.vercel.app'],
-//     //origin:true,
-//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//     allowedHeaders: ['Content-Type', 'Authorization'],
-//     credentials: true,
-// }));
+// CORS configuration
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'http://localhost:8080',
+  'http://localhost:8081',
+  // Vercel preview and production URLs for the frontend
+  'https://agro-connect-y6nl-git-main-upayanchatterjee7-gmailcoms-projects.vercel.app',
+  'https://agro-connect-y6nl-upayanchatterjee7-gmailcoms-projects.vercel.app',
+  'https://agro-connect-y6nl.vercel.app',
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    if (
+      allowedOrigins.includes(origin) ||
+      /\.vercel\.app$/.test(origin) // allow any vercel.app domain
+    ) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+};
 
 
-// CORS middleware at the very top
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://agro-connect-y6nl-git-main-upayanchatterjee7-gmailcoms-projects.vercel.app");
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+// Enable CORS for all routes
+app.use(cors(corsOptions));
 
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200);
-  }
-  next();
-});
-
-
-// Handle preflight requests
-app.options('*', cors());
 
 // for testing
 app.get('/', (req, res) => {

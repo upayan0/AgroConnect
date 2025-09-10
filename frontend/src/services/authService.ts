@@ -69,6 +69,7 @@ class AuthService {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(userData),
+      credentials: 'include',
     });
 
     if (!response.ok) {
@@ -86,6 +87,7 @@ class AuthService {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(loginData),
+      credentials: 'include',
     });
 
     if (!response.ok) {
@@ -103,6 +105,7 @@ class AuthService {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email }),
+      credentials: 'include',
     });
 
     if (!response.ok) {
@@ -117,6 +120,7 @@ class AuthService {
     const response = await fetch(`${API_BASE_URL}/auth/profile`, {
       method: 'GET',
       headers: this.getAuthHeaders(),
+      credentials: 'include',
     });
 
     if (!response.ok) {
@@ -136,6 +140,7 @@ class AuthService {
       method: 'PUT',
       headers: this.getAuthHeaders(),
       body: JSON.stringify(profileData),
+      credentials: 'include',
     });
 
     if (!response.ok) {
